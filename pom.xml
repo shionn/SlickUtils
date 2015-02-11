@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>shionn.slick</groupId>
   <artifactId>SlickUtils</artifactId>
-  <version>1.0</version>
+  <version>1.0-SNAPSHOT</version>
   <name>SlickUtils</name>
   <description>De petit ajout à Slick</description>
   <url>http://shionn.org/SlickUtils</url>
