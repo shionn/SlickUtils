@@ -33,8 +33,8 @@ public class TextArea {
 
 	public void render() {
 		int liney = getStartLine();
-		for (int i = 0; i < lines.size(); i++) {
-			liney = renderText(lines.get(i), liney);
+		for (TextAreaLine line : lines) {
+			liney = renderText(line, liney);
 		}
 	}
 

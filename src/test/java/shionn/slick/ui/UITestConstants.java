@@ -1,5 +1,11 @@
 package shionn.slick.ui;
 
+/**
+ * Code sous licence GPLv3 (http://www.gnu.org/licenses/gpl.html)
+ * 
+ * @author <b>Shionn</b>, shionn@gmail.com <i>http://shionn.org</i><br>
+ *         GCS d- s+:+ a+ C++ UL/M P L+ E--- W++ N K- w-- M+ t+ 5 X R+ !tv b+ D+ G- e+++ h+ r- y+
+ */
 public class UITestConstants {
 	public static final String P1 = "Lorem ipsum dolor sit amet, consectetur "
 			+ "adipiscing elit. Ut erat magna, accumsan eget rutrum vitae, venenatis in nunc. Ut "

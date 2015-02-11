@@ -15,8 +15,11 @@ import org.newdawn.slick.Font;
  */
 public class TextFormater {
 
+	private static final Pattern END_LINE = Pattern.compile("\\n");
+	private static final Pattern SEPARATOR = Pattern.compile(" ");
+
 	public String[] splitParagraph(String text) {
-		return text.split("\\n");
+		return END_LINE.split(text);
 	}
 
 	public List<String> splitLine(String paragraph, Font font, int length) {
@@ -36,8 +39,7 @@ public class TextFormater {
 	}
 
 	private int getSeparatorIndex(String text, Font font, int length) {
-		Pattern pattern = Pattern.compile(" ");
-		Matcher m = pattern.matcher(text);
+		Matcher m = SEPARATOR.matcher(text);
 		int index = text.length();
 		while (m.find() && font.getWidth(text.substring(0, m.end())) < length) {
 			index = m.end();

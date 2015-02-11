@@ -43,8 +43,6 @@ public class TextAreaTest {
 		when(font.getWidth(anyString())).thenAnswer(new Answer<Integer>() {
 			@Override
 			public Integer answer(InvocationOnMock invocation) throws Throwable {
-				verify(font, times(EXPECTED_LINE_COUNT))
-						.drawString(anyInt(), anyInt(), anyString());
 				return CHAR_WIDTH * ((String) (invocation.getArguments()[0])).length();
 			}
 		});
