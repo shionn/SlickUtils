@@ -32,7 +32,7 @@ public class TextAreaTest {
 	private static final int WIDTH = 100;
 	private static final int CHAR_HEIGHT = 10;
 	private static final int CHAR_WIDTH = 10;
-	private static final int EXPECTED_LINE_COUNT_AFTER_ADD = 13;
+	private static final int EXPECTED_LINE_COUNT_AFTER_ADD = 12;
 	private TextArea subject = new TextArea(X, Y, WIDTH, HEIGHT);
 	@Mock
 	private Font font;

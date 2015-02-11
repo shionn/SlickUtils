@@ -1,4 +1,4 @@
-package shionn.slick.ui;
+package shionn.slick.exemple;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -6,6 +6,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import shionn.slick.ui.TextArea;
+import shionn.slick.ui.UITestConstants;
 import shionn.slick.ui.align.VerticalAlignement;
 
 /**
