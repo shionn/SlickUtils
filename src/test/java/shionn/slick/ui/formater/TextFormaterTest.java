@@ -25,7 +25,7 @@ public class TextFormaterTest {
 
 	@Test
 	public void testSplitParagraph() {
-		String[] paragraphs = formater.splitParagraph("paraph0\nparaph1\nparaph2");
+		List<String> paragraphs = formater.splitParagraph("paraph0\nparaph1\nparaph2");
 		assertThat(paragraphs).contains("paraph0", "paraph1", "paraph2");
 	}
 

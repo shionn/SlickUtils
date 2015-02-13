@@ -1,6 +1,7 @@
 package shionn.slick.ui.formater;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,8 +19,8 @@ public class TextFormater {
 	private static final Pattern END_LINE = Pattern.compile("\\n");
 	private static final Pattern SEPARATOR = Pattern.compile(" ");
 
-	public String[] splitParagraph(String text) {
-		return END_LINE.split(text);
+	public List<String> splitParagraph(String text) {
+		return Arrays.asList(END_LINE.split(text));
 	}
 
 	public List<String> splitLine(String paragraph, Font font, int length) {

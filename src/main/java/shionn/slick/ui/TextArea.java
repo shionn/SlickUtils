@@ -2,6 +2,7 @@ package shionn.slick.ui;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.newdawn.slick.Font;
@@ -32,9 +33,10 @@ public class TextArea {
 	}
 
 	public void render() {
-		int liney = getStartLine();
-		for (TextAreaLine line : lines) {
-			liney = renderText(line, liney);
+		int y = getStartLine();
+		Iterator<TextAreaLine> lines = this.lines.iterator();
+		while (!isLastLine(y) && lines.hasNext()) {
+			y = render(lines.next(), y);
 		}
 	}
 
@@ -43,16 +45,21 @@ public class TextArea {
 		return bottomUp ? y + height - firstFontSize : y;
 	}
 
-	private int renderText(TextAreaLine line, int liney) {
-		int y = liney;
-		for (String p : formater.splitParagraph(line.getText())) {
-			for (String l : getLines(line.getFont(), p)) {
-				// ici des itération sont faite en trop !
-				if (!isLastLine(y)) {
-					renderLine(l, y, line.getFont(), line.getAlign());
-				}
-				y = getNextLineY(line.getFont(), y);
-			}
+	private int render(TextAreaLine line, int starty) {
+		int y = starty;
+		Iterator<String> paragraphs = formater.splitParagraph(line.getText()).iterator();
+		while (!isLastLine(y) && paragraphs.hasNext()) {
+			y = render(line, paragraphs.next(), y);
+		}
+		return y;
+	}
+
+	private int render(TextAreaLine line, String paragraph, int starty) {
+		int y = starty;
+		Iterator<String> texts = getLines(line.getFont(), paragraph).iterator();
+		while (!isLastLine(y) && texts.hasNext()) {
+			renderLine(texts.next(), y, line.getFont(), line.getAlign());
+			y = getNextLineY(line.getFont(), y);
 		}
 		return y;
 	}
@@ -112,8 +119,8 @@ public class TextArea {
 		return bottomUp;
 	}
 
-	// public void limit(int size) {
-	// this.lines = lines.subList(0, Math.min(lines.size(), size));
-	// }
+	public void keepFirst(int size) {
+		this.lines = lines.subList(0, Math.min(lines.size(), size));
+	}
 
 }
