@@ -16,7 +16,7 @@
 	<repositories>
 		<repository>
 			<id>shionn-public</id>
-			<name>Shionn public maven repository </name>
+			<name>Shionn public maven repository</name>
 			<url>http://maven.shionn.org/repository/public/</url>
 		</repository>
 	</repositories>
@@ -48,6 +48,26 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.2.201409121644</version>
+				<executions>
+					<execution>
+						<id>pre-unit-test</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>post-unit-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -56,18 +76,6 @@
 			<groupId>com.ninjacave.slick</groupId>
 			<artifactId>slick</artifactId>
 			<version>1.0.b237</version>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl.lwjgl</groupId>
-			<artifactId>lwjgl</artifactId>
-			<version>2.9.1</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jcraft</groupId>
-			<artifactId>jorbis</artifactId>
-			<version>0.0.17</version>
-			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
@@ -86,6 +94,13 @@
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>1.9.5</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.lwjgl.lwjgl</groupId>
+			<artifactId>lwjgl</artifactId>
+			<version>2.9.1</version>
 			<scope>test</scope>
 		</dependency>
 
