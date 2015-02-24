@@ -1,5 +1,8 @@
 package shionn.slick.animation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.newdawn.slick.geom.Vector2f;
 
 /**
@@ -14,11 +17,32 @@ public class PathAnimation {
 		ONCE, LOOP
 	}
 
+	private static class AnimationListenerPoint {
+
+		private int time;
+		private AnimationListener listener;
+
+		public AnimationListenerPoint(int time, AnimationListener listener) {
+			this.time = time;
+			this.listener = listener;
+		}
+
+		public int getTime() {
+			return time;
+		}
+
+		public AnimationListener getListener() {
+			return listener;
+		}
+
+	}
+
 	private Path path;
 	private int duration;
 	private int time;
 	private boolean running = false;
 	private Mode mode = Mode.ONCE;
+	private List<AnimationListenerPoint> listeners = new ArrayList<AnimationListenerPoint>();
 
 	public PathAnimation(Path path, int duration) {
 		this.path = path;
@@ -31,6 +55,7 @@ public class PathAnimation {
 
 	public void update(int delta) {
 		if (running) {
+			updateListeners(delta);
 			time += delta;
 			switch (mode) {
 			case ONCE:
@@ -50,6 +75,14 @@ public class PathAnimation {
 		}
 	}
 
+	private void updateListeners(int delta) {
+		for (AnimationListenerPoint pt : listeners) {
+			if (time <= pt.getTime() && pt.getTime() < time + delta) {
+				pt.getListener().on();
+			}
+		}
+	}
+
 	public void start() {
 		time = 0;
 		running = true;
@@ -58,6 +91,10 @@ public class PathAnimation {
 	public void start(Mode mode) {
 		this.mode = mode;
 		start();
+	}
+
+	public void addListener(int time, AnimationListener listener) {
+		this.listeners.add(new AnimationListenerPoint(time, listener));
 	}
 
 }
