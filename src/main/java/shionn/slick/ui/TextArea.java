@@ -24,6 +24,7 @@ public class TextArea {
 	private List<TextAreaLine> lines = new ArrayList<>();
 	private TextFormater formater = new TextFormater();
 	private boolean bottomUp;
+	private Font defaultFont;
 
 	public TextArea(int x, int y, int width, int height) {
 		this.x = x;
@@ -99,8 +100,19 @@ public class TextArea {
 		this.lines.clear();
 	}
 
+	public void addText(String text, VerticalAlignement align) {
+		if (defaultFont == null)
+			throw new IllegalStateException("Define default font whith setDefaultFont");
+		this.addText(text, defaultFont, align);
+	}
 	public void addText(String text, Font font, VerticalAlignement align) {
 		this.lines.add(new TextAreaLine(text, font, align));
+	}
+
+	public void addFirstText(String text, VerticalAlignement align) {
+		if (defaultFont == null)
+			throw new IllegalStateException("Define default font whith setDefaultFont");
+		this.addFirstText(text, defaultFont, align);
 	}
 
 	public void addFirstText(String text, Font font, VerticalAlignement align) {
@@ -121,6 +133,10 @@ public class TextArea {
 
 	public void keepFirst(int size) {
 		this.lines = lines.subList(0, Math.min(lines.size(), size));
+	}
+
+	public void setDefaultFont(Font defaultFont) {
+		this.defaultFont = defaultFont;
 	}
 
 }
