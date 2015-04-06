@@ -23,8 +23,6 @@ public class BezierPathTest {
 		tree = new BezierPath(new Vector2f(0, 0), new Vector2f(50, 50), new Vector2f(0, 100));
 	}
 
-
-
 	@Test
 	public void testPointAtFloat() throws Exception {
 		assertThat(two.pointAt(0)).isEqualTo(new Vector2f(10, 10));
@@ -34,6 +32,11 @@ public class BezierPathTest {
 		assertThat(tree.pointAt(0)).isEqualTo(new Vector2f(0, 0));
 		assertThat(tree.pointAt(.5f)).isEqualTo(new Vector2f(25, 50));
 		assertThat(tree.pointAt(1)).isEqualTo(new Vector2f(0, 100));
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void testBezierPathFloatArray() throws Exception {
+		new BezierPath(.1f);
 	}
 
 }

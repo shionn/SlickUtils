@@ -2,6 +2,7 @@ package shionn.slick.ui;
 
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -25,6 +26,7 @@ import shionn.slick.ui.align.VerticalAlignement;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class TextAreaTest {
+	private static final String FOU = "fou";
 	private static final int EXPECTED_LINE_COUNT = 10;
 	private static final int X = 10;
 	private static final int Y = 20;
@@ -78,6 +80,32 @@ public class TextAreaTest {
 		subject.render();
 		verify(font, times(EXPECTED_LINE_COUNT_AFTER_ADD)).drawString(anyInt(), anyInt(),
 				anyString());
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void testAddFirstTextWithoutDefaultFont() {
+		subject.addFirstText(FOU, VerticalAlignement.CENTER);
+	}
+
+	@Test()
+	public void testAddFirstTextWithDefaultFont() {
+		TextArea subject = spy(this.subject);
+		subject.setDefaultFont(font);
+		subject.addFirstText(FOU, VerticalAlignement.RIGHT);
+		verify(subject).addFirstText(FOU, font, VerticalAlignement.RIGHT);
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void testAddTextWithoutDefaultFont() {
+		subject.addText(FOU, VerticalAlignement.CENTER);
+	}
+
+	@Test()
+	public void testAddTextWithDefaultFont() {
+		TextArea subject = spy(this.subject);
+		subject.setDefaultFont(font);
+		subject.addText(FOU, VerticalAlignement.LEFT);
+		verify(subject).addText(FOU, font, VerticalAlignement.LEFT);
 	}
 
 }
